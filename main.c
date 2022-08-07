@@ -4,10 +4,12 @@
 #define MONTH 3
 #define SALESMAN 5
 
+
+// Function to find the lowest sales Month
 int lowestMonth(float matrice[MONTH][SALESMAN], char month[MONTH][4]) {
     
     int worstMonth = 0;
-    // Vector to sum the values of sales with each salesman
+    // Vector to sum the values of sales with each month
     float total[MONTH] = {0};
 
     for (int i = 0; i < MONTH; i++) {
@@ -17,7 +19,7 @@ int lowestMonth(float matrice[MONTH][SALESMAN], char month[MONTH][4]) {
     }
 
 
-    // Compare and find the best salesman
+    // Compare and find the lowest sales month
     for (int i = 0; i < MONTH; i++) {
         if (total[worstMonth] > total[i]) {
             worstMonth = i;
