@@ -4,6 +4,31 @@
 #define MONTH 3
 #define SALESMAN 5
 
+int lowestMonth(float matrice[MONTH][SALESMAN], char month[MONTH][4]) {
+    
+    int worstMonth = 0;
+    // Vector to sum the values of sales with each salesman
+    float total[MONTH] = {0};
+
+    for (int i = 0; i < MONTH; i++) {
+        for (int y = 0; y < SALESMAN; y++) {
+            total[i] = total[i] + matrice[i][y];
+        }
+    }
+
+
+    // Compare and find the best salesman
+    for (int i = 0; i < MONTH; i++) {
+        if (total[worstMonth] > total[i]) {
+            worstMonth = i;
+        }
+    }
+
+    printf("\nThe worst month of sales was '%s' with the total sales of: $%.2f\n", month[worstMonth], total[worstMonth]);
+
+    return 0;
+}
+
 // Function to find the best salesman per quarter
 int bestSeller(float matrice[MONTH][SALESMAN]) {
 
@@ -19,12 +44,12 @@ int bestSeller(float matrice[MONTH][SALESMAN]) {
 
     // Compare and find the best salesman
     for (int i = 0; i < SALESMAN; i++) {
-        if (bestSeller < total[i]) {
-            bestSeller = i + 1;
+        if (total[bestSeller] < total[i]) {
+            bestSeller = i;
         }
     }
 
-    printf("\nThe best performance was of V%d with the total sales of $%.2f\n", bestSeller, total[bestSeller - 1]);
+    printf("\nThe best performance was of V%d with the total sales of $%.2f\n", bestSeller + 1, total[bestSeller]);
 
     return 0;
 }
@@ -54,6 +79,7 @@ int main(void) {
     }
 
     bestSeller(matrice);
-    
+    lowestMonth(matrice, month);
+
     return 0;
 }
